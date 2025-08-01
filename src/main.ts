@@ -2,35 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import cors from 'cors'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: [
-      'https://library-managment-system-frontend-omega.vercel.app'
-    ],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders: 'Content-Type, Accept, Authorization',
-    credentials: true,
+    origin: '*'
   });
-
-  await app.listen(3000);
-
-  app.use((req, res, next) => {
-  res.header(
-    'Access-Control-Allow-Origin',
-    'https://library-managment-system-frontend-omega.vercel.app'
-  );
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-  next();
-});
-
 
   // Enable validation
   app.useGlobalPipes(new ValidationPipe({
