@@ -18,7 +18,10 @@ async function bootstrap() {
   await app.listen(3000);
 
   app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://library-managment-system-frontend-omega.vercel.app');
+  res.header(
+    'Access-Control-Allow-Origin',
+    'https://library-managment-system-frontend-omega.vercel.app'
+  );
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Credentials', 'true');
@@ -27,6 +30,7 @@ async function bootstrap() {
   }
   next();
 });
+
 
   // Enable validation
   app.useGlobalPipes(new ValidationPipe({
