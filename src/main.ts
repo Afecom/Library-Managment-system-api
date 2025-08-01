@@ -8,7 +8,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: '*'
+    origin: 'https://library-managment-system-frontend-omega.vercel.app',
+    credentials: true, // Optional: allow cookies, authorization headers
   });
 
   // Enable validation
